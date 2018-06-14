@@ -27,7 +27,8 @@ public class PostsIndexHandler extends AbstractRequestHandler<EmptyPayload> {
                                             p(p.getContent()),
                                             ul().with(p.getCategories().stream().map((cat) ->
                                                     li(cat))
-                                                    .collect(Collectors.toList()))))
+                                                    .collect(Collectors.toList())))
+                                                )
                                     .collect(Collectors.toList()))
             ).render();
             return Answer.ok(html);

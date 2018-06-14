@@ -16,6 +16,30 @@ class NewPostPayload implements Validable {
     private String content;
 
     public boolean isValid() {
-        return title != null && !title.isEmpty() && content != null && !content.isEmpty();
+        return getTitle() != null && !getTitle().isEmpty() && getContent() != null && !getContent().isEmpty();
     }
+
+	public String getTitle() {
+		return title;
+	}
+
+	public void setTitle(String title) {
+		this.title = title;
+	}
+
+	public List<String> getCategories() {
+		return categories;
+	}
+
+	public void setCategories(List<String> categories) {
+		this.categories = categories;
+	}
+
+	public String getContent() {
+		return content;
+	}
+
+	public void setContent(String content) {
+		this.content = content;
+	}
 }

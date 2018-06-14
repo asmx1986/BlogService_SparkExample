@@ -14,13 +14,13 @@ class CommandLineOptions {
     String database = "blog";
 
     @Parameter(names = {"--db-host"})
-    String dbHost = "localhost";
+    String dbHost = "192.168.99.100";
 
     @Parameter(names = {"--db-username"})
-    String dbUsername = "blog_owner";
+    String dbUsername = "sa";
 
     @Parameter(names = {"--db-password"})
-    String dbPassword = "sparkforthewin";
+    String dbPassword = "password";
 
     @Parameter(names = {"--db-port"})
     Integer dbPort = 5432;

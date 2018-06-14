@@ -9,8 +9,21 @@ import java.util.UUID;
 public class Comment {
     UUID comment_uuid;
     UUID post_uuid;
-    String author;
-    String content;
+    private String author;
+    private String content;
     boolean approved;
     Date submission_date;
+    
+	public String getAuthor() {
+		return author;
+	}
+	public void setAuthor(String author) {
+		this.author = author;
+	}
+	public String getContent() {
+		return content;
+	}
+	public void setContent(String content) {
+		this.content = content;
+	}
 }

@@ -34,6 +34,7 @@ public class PostsEditHandler extends AbstractRequestHandler<EditPostPayload> {
         if (!post.isPresent()) {
             return new Answer(404);
         }
+        /*
         if (value.getTitle() != null) {
             post.get().setTitle(value.getTitle());
         }
@@ -43,6 +44,7 @@ public class PostsEditHandler extends AbstractRequestHandler<EditPostPayload> {
         if (value.getCategories() != null) {
             post.get().setCategories(value.getCategories());
         }
+        */
         model.updatePost(post.get());
         return new Answer(200);
     }
