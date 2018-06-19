@@ -15,7 +15,7 @@
 <body>
 <h1>My marvellous blog</h1>
 
-<#list posts as post>
+<#list model as post>
     <div class="post">
         <h2>${post.title}</h2>
         <p>${post.content}</p>

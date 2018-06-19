@@ -1,10 +1,25 @@
 package me.tomassetti;
 
+import spark.ModelAndView;
+import spark.template.freemarker.FreeMarkerEngine;
+
 public class Answer {
+
+    private int code;
+    private String body;
+
+    public Answer(int code, String body){
+        this.code = code;
+        this.body = body;
+    }
 
     public Answer(int code) {
         this.code = code;
         this.body = "";
+    }
+
+    public static Answer ok(String body) {
+        return new Answer(200, body);
     }
 
     @Override
@@ -38,17 +53,5 @@ public class Answer {
 
     public int getCode() {
         return code;
-    }
-
-    private int code;
-    private String body;
-
-    public Answer(int code, String body){
-        this.code = code;
-        this.body = body;
-    }
-
-    public static Answer ok(String body) {
-        return new Answer(200, body);
     }
 }

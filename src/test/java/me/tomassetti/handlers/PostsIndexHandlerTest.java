@@ -10,6 +10,7 @@ import java.util.Collections;
 import me.tomassetti.Answer;
 import me.tomassetti.model.Model;
 import me.tomassetti.model.Post;
+import spark.template.freemarker.FreeMarkerEngine;
 
 import org.easymock.EasyMock;
 import org.junit.Test;
@@ -26,7 +27,7 @@ public class PostsIndexHandlerTest {
         expect(model.getAllPosts()).andReturn(Collections.emptyList());
         replay(model);
 
-        PostsIndexHandler handler = new PostsIndexHandler(model);
+        PostsIndexHandler handler = new PostsIndexHandler(model, new FreeMarkerEngine());
         String expectedHtml = "<body><h1>My wonderful blog</h1><div></div></body>";
         assertEquals(new Answer(200, expectedHtml), handler.process(new EmptyPayload(), Collections.emptyMap(), true));
 
@@ -50,7 +51,7 @@ public class PostsIndexHandlerTest {
         expect(model.getAllPosts()).andReturn(ImmutableList.of(post1, post2));
         replay(model);
 
-        PostsIndexHandler handler = new PostsIndexHandler(model);
+        PostsIndexHandler handler = new PostsIndexHandler(model, new FreeMarkerEngine());
         String expectedHtml = "<body><h1>My wonderful blog</h1><div><div><h2>First post</h2><p>First post content</p><ul><li>Howto</li><li>BoringPosts</li></ul></div><div><h2>Second post</h2><p>Second post content</p><ul></ul></div></div></body>";
         assertEquals(new Answer(200, expectedHtml), handler.process(new EmptyPayload(), Collections.emptyMap(), true));
 
@@ -63,7 +64,7 @@ public class PostsIndexHandlerTest {
         expect(model.getAllPosts()).andReturn(Collections.emptyList());
         replay(model);
 
-        PostsIndexHandler handler = new PostsIndexHandler(model);
+        PostsIndexHandler handler = new PostsIndexHandler(model, new FreeMarkerEngine());
         String expectedHtml = "[ ]";
         assertEquals(new Answer(200, expectedHtml), handler.process(new EmptyPayload(), Collections.emptyMap(), false));
 
@@ -87,7 +88,7 @@ public class PostsIndexHandlerTest {
         expect(model.getAllPosts()).andReturn(ImmutableList.of(post1, post2));
         replay(model);
 
-        PostsIndexHandler handler = new PostsIndexHandler(model);
+        PostsIndexHandler handler = new PostsIndexHandler(model, new FreeMarkerEngine());
         String expectedHtml = "[ {\n" +
                 "  \"post_uuid\" : null,\n" +
                 "  \"title\" : \"First post\",\n" +
