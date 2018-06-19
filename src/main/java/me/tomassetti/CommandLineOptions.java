@@ -5,7 +5,7 @@ import com.beust.jcommander.Parameter;
 class CommandLineOptions {
 
     @Parameter(names = "--debug")
-    boolean debug = false;
+    boolean debug = true;
 
     @Parameter(names = {"--service-port"})
     Integer servicePort = 4567;
@@ -14,13 +14,13 @@ class CommandLineOptions {
     String database = "blog";
 
     @Parameter(names = {"--db-host"})
-    String dbHost = "192.168.99.100";
+    String dbHost = "localhost";
 
     @Parameter(names = {"--db-username"})
-    String dbUsername = "sa";
+    String dbUsername = "postgres";
 
     @Parameter(names = {"--db-password"})
-    String dbPassword = "password";
+    String dbPassword = "root";
 
     @Parameter(names = {"--db-port"})
     Integer dbPort = 5432;
