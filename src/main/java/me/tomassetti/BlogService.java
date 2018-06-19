@@ -9,6 +9,8 @@ import me.tomassetti.sql2omodel.Sql2oModel;
 import org.sql2o.Sql2o;
 import org.sql2o.converters.UUIDConverter;
 import org.sql2o.quirks.PostgresQuirks;
+
+import spark.ModelAndView;
 import spark.Request;
 import spark.Response;
 import spark.Route;
@@ -54,12 +56,12 @@ public class BlogService
         Configuration freeMarkerConfiguration = new Configuration();
         freeMarkerConfiguration.setTemplateLoader(new ClassTemplateLoader(BlogService.class, "/"));
         freeMarkerEngine.setConfiguration(freeMarkerConfiguration);
-
+        
         // insert a post (using HTTP post method)
         post("/posts", new PostsCreateHandler(model));
 
         // get all post (using HTTP get method)
-        get("/posts", new PostsIndexHandler(model));
+        get("/posts", new PostsIndexHandler(model, freeMarkerEngine));
 
         get("/posts/:uuid", new GetSinglePostHandler(model));
 

@@ -38,4 +38,10 @@ public class Post {
 	public void setContent(String content) {
 		this.content = content;
 	}
+	public Date getPublishing_date() {
+		return publishing_date;
+	}
+	public void setPublishing_date(Date publishing_date) {
+		this.publishing_date = publishing_date;
+	}
 }

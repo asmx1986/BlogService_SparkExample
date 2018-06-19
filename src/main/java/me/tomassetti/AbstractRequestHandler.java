@@ -1,13 +1,16 @@
 package me.tomassetti;
 
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.Map;
 
 import me.tomassetti.handlers.EmptyPayload;
 import me.tomassetti.model.Model;
+import spark.ModelAndView;
 import spark.Request;
 import spark.Response;
 import spark.Route;
+import spark.template.freemarker.FreeMarkerEngine;
 
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -17,17 +20,29 @@ public abstract class AbstractRequestHandler<V extends Validable> implements Req
 
     private Class<V> valueClass;
     protected Model model;
+    private FreeMarkerEngine freeMarkerEngine;
 
     private static final int HTTP_BAD_REQUEST = 400;
 
     public AbstractRequestHandler(Class<V> valueClass, Model model){
+    	this(valueClass, model, null);
+    }
+
+    public AbstractRequestHandler(Class<V> valueClass, Model model, FreeMarkerEngine freeMarkerEngine){
         this.valueClass = valueClass;
         this.model = model;
+        this.freeMarkerEngine = freeMarkerEngine;
     }
 
     private static boolean shouldReturnHtml(Request request) {
         String accept = request.headers("Accept");
         return accept != null && accept.contains("text/html");
+    }
+
+    protected Answer view(String view, Object model) {
+    	Map<String, Object> viewModel = new HashMap<>();
+    	viewModel.put("model", model);
+        return new Answer(200, this.freeMarkerEngine.render(new ModelAndView(viewModel, view)));
     }
 
     public static String dataToJson(Object data) {
@@ -62,12 +77,13 @@ public abstract class AbstractRequestHandler<V extends Validable> implements Req
             Map<String, String> urlParams = request.params();
             Answer answer = process(value, urlParams, shouldReturnHtml(request));
             response.status(answer.getCode());
+            String bodyResult = answer.getBody();
             if (shouldReturnHtml(request)) {
                 response.type("text/html");
             } else {
                 response.type("application/json");
             }
-            response.body(answer.getBody());
+            response.body(bodyResult);
             return answer.getBody();
         } catch (JsonMappingException e) {
             response.status(400);
