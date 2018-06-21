@@ -29,7 +29,7 @@ public class PostsCreateHandlerTest {
         Model model = EasyMock.createMock(Model.class);
         replay(model);
 
-        PostsCreateHandler handler = new PostsCreateHandler(model);
+        AreasSearchHandler handler = new AreasSearchHandler(model);
         assertEquals(new Answer(400), handler.process(newPost, Collections.emptyMap(), false));
         assertEquals(new Answer(400), handler.process(newPost, Collections.emptyMap(), true));
 
@@ -47,7 +47,7 @@ public class PostsCreateHandlerTest {
         expect(model.createPost("My new post", "Bla bla bla", Collections.emptyList())).andReturn(UUID.fromString("728084e8-7c9a-4133-a9a7-f2bb491ef436"));
         replay(model);
 
-        PostsCreateHandler handler = new PostsCreateHandler(model);
+        AreasSearchHandler handler = new AreasSearchHandler(model);
         assertEquals(new Answer(201, "728084e8-7c9a-4133-a9a7-f2bb491ef436"), handler.process(newPost, Collections.emptyMap(), false));
 
         verify(model);

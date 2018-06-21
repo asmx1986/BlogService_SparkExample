@@ -57,27 +57,36 @@ public class BlogService
         freeMarkerConfiguration.setTemplateLoader(new ClassTemplateLoader(BlogService.class, "/"));
         freeMarkerEngine.setConfiguration(freeMarkerConfiguration);
         
-        // insert a post (using HTTP post method)
-        post("/posts", new PostsCreateHandler(model));
-
-        // get all post (using HTTP get method)
-        get("/posts", new PostsIndexHandler(model, freeMarkerEngine));
-
-        get("/posts/:uuid", new GetSinglePostHandler(model));
-
-        put("/posts/:uuid", new PostsEditHandler(model));
-
-        delete("/posts/:uuid", new PostsDeleteHandler(model));
-
-        post("/posts/:uuid/comments", new CommentsCreateHandler(model));
-
-        get("/posts/:uuid/comments", new CommentsListHandler(model));
-
         get("/alive", new Route() {
             @Override
             public Object handle(Request request, Response response) throws Exception {
                 return "ok";
             }
         });
+
+    
+
+        //AREAS
+        //listado
+        get("/areas", new AreasSearchHandler(model));
+        //crear
+        get("/areas/create_form", null);
+        post("/areas", null); //AreaCreatePayload
+        //editar
+        get("/areas/:uuid/edit_form", null);
+        put("/areas/:uuid", null); //AreaUpdatePayload
+        //ver detalle
+        get("/areas/:uuid", null);
+        //eliminar
+        get("/areas/:uuid/delete_form", null);
+        delete("/areas/:uuid", null);
+        /*
+		*/
+    
+    
+    
+    
+    
+    
     }
 }
