@@ -42,7 +42,8 @@ public abstract class AbstractRequestHandler<V extends Validable> implements Req
     protected Answer view(String view, Object model) {
     	Map<String, Object> viewModel = new HashMap<>();
     	viewModel.put("model", model);
-        return new Answer(200, this.freeMarkerEngine.render(new ModelAndView(viewModel, view)));
+    	viewModel.put("bodyTemplate", view);
+        return new Answer(200, this.freeMarkerEngine.render(new ModelAndView(viewModel, "layout.ftl")));
     }
 
     public static String dataToJson(Object data) {
