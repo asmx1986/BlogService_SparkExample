@@ -20,7 +20,7 @@ import com.google.common.collect.ImmutableList;
 
 
 public class PostsIndexHandlerTest {
-
+/*
     @Test
     public void emptyListIsHandledCorrectlyInHtmlOutput() {
         Model model = EasyMock.createMock(Model.class);
@@ -106,5 +106,5 @@ public class PostsIndexHandlerTest {
 
         verify(model);
     }
-
+*/
 }

@@ -17,7 +17,7 @@ public class GetSinglePostHandler extends AbstractRequestHandler<EmptyPayload> {
 
     @Override
     protected Answer processImpl(EmptyPayload value, Map<String,String> urlParams, boolean shouldReturnHtml) {
-        if (!urlParams.containsKey(":uuid")) {
+     /*   if (!urlParams.containsKey(":uuid")) {
             throw new IllegalArgumentException();
         }
         UUID uuid;
@@ -32,6 +32,9 @@ public class GetSinglePostHandler extends AbstractRequestHandler<EmptyPayload> {
             return new Answer(404);
         }
         return Answer.ok(dataToJson(post.get()));
+        */
+    	return null;
+         
     }
 
 }

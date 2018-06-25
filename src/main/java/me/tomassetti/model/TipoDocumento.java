@@ -9,11 +9,11 @@ import java.util.UUID;
 public class TipoDocumento {
     
    
-    public Integer id;
+    public String id;
     public String nombre;
 
     
-	public Integer getid() {
+	public String getid() {
 		return id;
 	}
 	public void setid(String id) {

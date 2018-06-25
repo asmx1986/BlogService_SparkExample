@@ -20,7 +20,7 @@ public class PostsDeleteHandler extends AbstractRequestHandler<EmptyPayload> {
 
     @Override
     protected Answer processImpl(EmptyPayload value, Map<String, String> urlParams, boolean shouldReturnHtml) {
-        if (!urlParams.containsKey(":uuid")) {
+      /*  if (!urlParams.containsKey(":uuid")) {
             throw new IllegalArgumentException();
         }
         UUID uuid;
@@ -36,5 +36,7 @@ public class PostsDeleteHandler extends AbstractRequestHandler<EmptyPayload> {
         }
         model.deletePost(uuid);
         return new Answer(200);
+        */
+    	return null;
     }
 }

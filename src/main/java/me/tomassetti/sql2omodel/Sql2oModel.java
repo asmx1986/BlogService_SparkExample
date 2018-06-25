@@ -2,12 +2,14 @@ package me.tomassetti.sql2omodel;
 
 import me.tomassetti.RandomUuidGenerator;
 import me.tomassetti.UuidGenerator;
+import me.tomassetti.model.Area;
 import me.tomassetti.model.Comment;
 import me.tomassetti.model.Model;
 import me.tomassetti.model.Post;
 import org.sql2o.Connection;
 import org.sql2o.Sql2o;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
@@ -22,7 +24,7 @@ public class Sql2oModel implements Model {
         this.sql2o = sql2o;
         uuidGenerator = new RandomUuidGenerator();
     }
-
+/*
     @Override
     public UUID createPost(String title, String content, List<String> categories) {
         try (Connection conn = sql2o.beginTransaction()) {
@@ -129,5 +131,10 @@ public class Sql2oModel implements Model {
                     .executeUpdate();
         }
     }
+*/
 
+	@Override
+	public List<Area> areasList() {
+		return new ArrayList<Area> ();
+	}
 }

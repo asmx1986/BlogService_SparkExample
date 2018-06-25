@@ -18,7 +18,7 @@ public class PostsIndexHandler extends AbstractRequestHandler<EmptyPayload> {
 
     @Override
     protected Answer processImpl(EmptyPayload value, Map<String,String> urlParams, boolean shouldReturnHtml) {
-        if (shouldReturnHtml) {
+      /*  if (shouldReturnHtml) {
         	/*
             String html = body().with(
                     h1("My wonderful blog"),
@@ -34,12 +34,15 @@ public class PostsIndexHandler extends AbstractRequestHandler<EmptyPayload> {
                                     .collect(Collectors.toList()))
             ).render();
             return Answer.ok(html);
-            */
+            
         	return view("posts.ftl", model.getAllPosts());
         } else {
             String json = dataToJson(model.getAllPosts());
             return Answer.ok(json);
+           */
+    	return null;
+            
         }
     }
 
-}
+

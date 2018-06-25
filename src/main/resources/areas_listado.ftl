@@ -1,7 +1,7 @@
 <h2>Listado!</h2>
 
-<#list model as post>
-    <div class="post">
+<#list model as Area>
+    <div class="area">
         <h2>${post.title}</h2>
         <p>${post.content}</p>
         

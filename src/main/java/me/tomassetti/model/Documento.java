@@ -9,11 +9,11 @@ import java.util.UUID;
 public class Documento {
     
    
-    public Integer numero;
+    private Integer numero;
    
-    public TipoDocumento TipoDocumentos; 
+    private TipoDocumento TipoDocumentos; 
     
-	public Integer getnumero() {
+	private Integer getnumero() {
 		return numero;
 	}
 	public void setnumero(Integer numero) {
@@ -24,7 +24,8 @@ public class Documento {
 	public TipoDocumento getTipoDocumentos() {
 		return TipoDocumentos;
 	}
-	public TipoDocumento setTipoDocumento (TipoDocumento TipoDocumento){
+	
+	public void setTipoDocumento (TipoDocumento TipoDocumento){
 		
 		this.TipoDocumentos = TipoDocumentos; 
 		

@@ -18,7 +18,7 @@ import org.junit.Test;
 
 
 public class PostsCreateHandlerTest {
-
+/*
     @Test
     public void anInvalidNewPostReturnsBadRequest() {
         NewPostPayload newPost = new NewPostPayload();
@@ -52,5 +52,5 @@ public class PostsCreateHandlerTest {
 
         verify(model);
     }
-
+*/
 }

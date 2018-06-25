@@ -68,7 +68,8 @@ public class BlogService
 
         //AREAS
         //listado
-        get("/areas", new AreasSearchHandler(model));
+        get("/areas", new AreasSearchHandler(model, freeMarkerEngine));
+        /*
         //crear
         get("/areas/create_form", null);
         post("/areas", null); //AreaCreatePayload
@@ -80,7 +81,6 @@ public class BlogService
         //eliminar
         get("/areas/:uuid/delete_form", null);
         delete("/areas/:uuid", null);
-        /*
 		*/
     
     

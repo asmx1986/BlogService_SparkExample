@@ -11,6 +11,7 @@ import java.util.stream.Collectors;
 import static j2html.TagCreator.*;
 
 public class CommentsListHandler extends AbstractRequestHandler<EmptyPayload> {
+	
 
     public CommentsListHandler(Model model) {
         super(EmptyPayload.class, model);
@@ -18,7 +19,7 @@ public class CommentsListHandler extends AbstractRequestHandler<EmptyPayload> {
 
     @Override
     protected Answer processImpl(EmptyPayload value, Map<String, String> urlParams, boolean shouldReturnHtml) {
-        UUID post = UUID.fromString(urlParams.get(":uuid"));
+       /* UUID post = UUID.fromString(urlParams.get(":uuid"));
         if (!model.existPost(post)) {
             return new Answer(400);
         }
@@ -35,8 +36,9 @@ public class CommentsListHandler extends AbstractRequestHandler<EmptyPayload> {
             return Answer.ok(html);
         } else {
             String json = dataToJson(model.getAllCommentsOn(post));
-            return Answer.ok(json);
+            return Answer.ok(json);*/
+    	return null;
         }
     }
 
-}
+

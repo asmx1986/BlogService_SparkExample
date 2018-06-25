@@ -20,7 +20,7 @@ public class PostsEditHandler extends AbstractRequestHandler<EditPostPayload> {
 
     @Override
     protected Answer processImpl(EditPostPayload value, Map<String, String> urlParams, boolean shouldReturnHtml) {
-        if (!urlParams.containsKey(":uuid")) {
+       /* if (!urlParams.containsKey(":uuid")) {
             throw new IllegalArgumentException();
         }
         UUID uuid;
@@ -33,6 +33,7 @@ public class PostsEditHandler extends AbstractRequestHandler<EditPostPayload> {
         Optional<Post> post = model.getPost(uuid);
         if (!post.isPresent()) {
             return new Answer(404);
+         
         }
         /*
         if (value.getTitle() != null) {
@@ -45,7 +46,11 @@ public class PostsEditHandler extends AbstractRequestHandler<EditPostPayload> {
             post.get().setCategories(value.getCategories());
         }
         */
+    	/*
         model.updatePost(post.get());
         return new Answer(200);
+        */
+    	return null;
+        
     }
 }
