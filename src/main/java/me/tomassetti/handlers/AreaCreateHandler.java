@@ -9,22 +9,28 @@ import java.util.UUID;
 
 public class AreaCreateHandler extends AbstractRequestHandler<NewAreaPayload> {
 
-    private Model model;
+   private Model model;
 
     public AreaCreateHandler(Model model) {
         super(NewAreaPayload.class, model);
         this.model = model;
     }
-
+/*
     @Override
     protected Answer processImpl(NewAreaPayload creation, Map<String, String> urlParams, boolean shouldReturnHtml) {
-       /* UUID post = UUID.fromString(urlParams.get(":uuid"));
+        UUID post = UUID.fromString(urlParams.get(":uuid"));
         if (!model.existPost(post)){
             return new Answer(400);
         }
-        UUID id = model.createComment(post, creation.getArea(), creation.getContent());
+        UUID id = model.Area(post, creation.getArea());
         return Answer.ok(id.toString());
-    */
-    	return null;
-    }
+    
+     return view("areas_creacion.ftl", model.areasList());
+    } */
+
+	@Override
+	protected Answer processImpl(NewAreaPayload value, Map<String, String> urlParams, boolean shouldReturnHtml) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }

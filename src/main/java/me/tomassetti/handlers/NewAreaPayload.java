@@ -30,4 +30,9 @@ class NewAreaPayload implements Validable {
 	public void setMotivos(List<Motivo> motivos) {
 		this.motivos = motivos;
 	}
+
+	public String getArea() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }

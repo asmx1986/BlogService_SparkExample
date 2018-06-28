@@ -2,6 +2,7 @@ package me.tomassetti.model;
 
 import lombok.Data;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.UUID;
@@ -13,6 +14,8 @@ public class Area {
     public String Id;
     public String Nombre;
     public List <Motivo> Motivos; 
+    public ArrayList<String> Area = new ArrayList<String>();
+ 
     
 	public String getId() {
 		return Id;
@@ -33,5 +36,7 @@ public class Area {
 	public void setMotivo(List<Motivo> Motivos) {
 		this.Motivos = Motivos;
 	}
+	
+	
 	
 }

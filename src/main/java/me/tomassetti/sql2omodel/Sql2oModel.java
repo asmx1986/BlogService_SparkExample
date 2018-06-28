@@ -24,9 +24,43 @@ public class Sql2oModel implements Model {
         this.sql2o = sql2o;
         uuidGenerator = new RandomUuidGenerator();
     }
-/*
-    @Override
-    public UUID createPost(String title, String content, List<String> categories) {
+    
+	@Override
+	public List<Area> areasList() {
+	
+		return new ArrayList<Area> ();
+
+	
+	}
+	
+	
+	
+	/*
+	   @Override
+	    public List<Post> getAllPosts() {
+	        try (Connection conn = sql2o.open()) {
+	            List<Post> posts = conn.createQuery("select * from posts")
+	                    .executeAndFetch(Post.class);
+	       /* posts.forEach((post) -> post.setCategories(getCategoriesFor(conn, post.getPost_uuid())));
+	            return posts;
+	        }
+	    }
+	   
+	   @Override
+	    public boolean existPost(UUID post) {
+	        try (Connection conn = sql2o.open()) {
+	            List<Post> posts = conn.createQuery("select * from posts where post_uuid=:post")
+	                    .addParameter("post", post)
+	                    .executeAndFetch(Post.class);
+	            return posts.size() > 0;
+	        }
+	    }
+
+	
+
+
+ /*   @Override
+    public UUID createPost(String title, String content, List<String> areas) {
         try (Connection conn = sql2o.beginTransaction()) {
             UUID postUuid = uuidGenerator.generate();
             conn.createQuery("insert into posts(post_uuid, title, content, publishing_date) VALUES (:post_uuid, :title, :content, :date)")
@@ -35,7 +69,7 @@ public class Sql2oModel implements Model {
                     .addParameter("content", content)
                     .addParameter("date", new Date())
                     .executeUpdate();
-            categories.forEach((category) ->
+            areas.forEach((category) ->
                     conn.createQuery("insert into posts_categories(post_uuid, category) VALUES (:post_uuid, :category)")
                     .addParameter("post_uuid", postUuid)
                     .addParameter("category", category)
@@ -44,7 +78,22 @@ public class Sql2oModel implements Model {
             return postUuid;
         }
     }
-
+        @Override
+    public Optional<Post> getPost(UUID uuid) {
+        try (Connection conn = sql2o.open()) {
+            List<Post> posts = conn.createQuery("select * from posts where post_uuid=:post_uuid")
+                    .addParameter("post_uuid", uuid)
+                    .executeAndFetch(Post.class);
+            if (posts.size() == 0) {
+                return Optional.empty();
+            } else if (posts.size() == 1) {
+                return Optional.of(posts.get(0));
+            } else {
+                throw new RuntimeException();
+            }
+        }
+    }
+/*
     @Override
     public UUID createComment(UUID post, String author, String content) {
         try (Connection conn = sql2o.open()) {
@@ -61,16 +110,7 @@ public class Sql2oModel implements Model {
         }
     }
 
-    @Override
-    public List<Post> getAllPosts() {
-        try (Connection conn = sql2o.open()) {
-            List<Post> posts = conn.createQuery("select * from posts")
-                    .executeAndFetch(Post.class);
-            posts.forEach((post) -> post.setCategories(getCategoriesFor(conn, post.getPost_uuid())));
-            return posts;
-        }
-    }
-
+ 
     private List<String> getCategoriesFor(Connection conn, UUID post_uuid) {
         return conn.createQuery("select category from posts_categories where post_uuid=:post_uuid")
                 .addParameter("post_uuid", post_uuid)
@@ -86,31 +126,9 @@ public class Sql2oModel implements Model {
         }
     }
 
-    @Override
-    public boolean existPost(UUID post) {
-        try (Connection conn = sql2o.open()) {
-            List<Post> posts = conn.createQuery("select * from posts where post_uuid=:post")
-                    .addParameter("post", post)
-                    .executeAndFetch(Post.class);
-            return posts.size() > 0;
-        }
-    }
+ 
 
-    @Override
-    public Optional<Post> getPost(UUID uuid) {
-        try (Connection conn = sql2o.open()) {
-            List<Post> posts = conn.createQuery("select * from posts where post_uuid=:post_uuid")
-                    .addParameter("post_uuid", uuid)
-                    .executeAndFetch(Post.class);
-            if (posts.size() == 0) {
-                return Optional.empty();
-            } else if (posts.size() == 1) {
-                return Optional.of(posts.get(0));
-            } else {
-                throw new RuntimeException();
-            }
-        }
-    }
+
 
     @Override
     public void updatePost(Post post) {
@@ -133,8 +151,8 @@ public class Sql2oModel implements Model {
     }
 */
 
-	@Override
-	public List<Area> areasList() {
-		return new ArrayList<Area> ();
-	}
+
+	 
+	
+	
 }
