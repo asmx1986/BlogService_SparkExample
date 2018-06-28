@@ -3,9 +3,9 @@ package me.tomassetti.sql2omodel;
 import me.tomassetti.RandomUuidGenerator;
 import me.tomassetti.UuidGenerator;
 import me.tomassetti.model.Area;
-import me.tomassetti.model.Comment;
 import me.tomassetti.model.Model;
-import me.tomassetti.model.Post;
+import me.tomassetti.model.Motivo;
+
 import org.sql2o.Connection;
 import org.sql2o.Sql2o;
 
@@ -135,6 +135,23 @@ public class Sql2oModel implements Model {
 
 	@Override
 	public List<Area> areasList() {
-		return new ArrayList<Area> ();
+        try (Connection conn = sql2o.open()) {
+        	List<Area> areas = conn.createQuery("select * from areas")
+                    .executeAndFetch(Area.class);
+        	areas.forEach((a) -> a.setMotivos(new ArrayList<Motivo>()));
+            return areas;
+        }
+	}
+
+	@Override
+	public void areasCreate(Area area) {
+        try (Connection conn = sql2o.open()) {
+            UUID uuid = uuidGenerator.generate();
+            area.setUuid(uuid);
+            conn.createQuery("insert into areas(uuid, nombre) VALUES (:uuid, :nombre)")
+                    .addParameter("uuid", uuid)
+                    .addParameter("nombre", area.getNombre())
+                    .executeUpdate();
+        }
 	}
 }

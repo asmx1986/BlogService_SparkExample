@@ -1,16 +1,17 @@
 <h2>Listado!</h2>
 
-<#list model as Area>
+<#list model as unArea>
     <div class="area">
-        <h2>${post.title}</h2>
-        <p>${post.content}</p>
+        <h2>Nombre: ${unArea.nombre}</h2>
+        <h5>id: ${unArea.uuid}</h5>
         
-        <h3>Categories:</h3>
-        <ul class="categories">
-            <#list post.categories as category>
-                <li>${category}</li>
+        <h3>Motivos de Visita:</h3>
+        <ul class="motivosVisita">
+            <#list unArea.motivos as mv>
+                <li>${mv}</li>
             </#list>
         </ul>
-        <i>Published on the ${post.publishing_date}</i>
     </div>
+    --------------
 </#list>
+<a href="/areas/create_form">Nuevo</a>

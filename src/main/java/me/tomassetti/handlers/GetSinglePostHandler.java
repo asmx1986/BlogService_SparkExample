@@ -7,7 +7,6 @@ import java.util.UUID;
 import me.tomassetti.AbstractRequestHandler;
 import me.tomassetti.Answer;
 import me.tomassetti.model.Model;
-import me.tomassetti.model.Post;
 
 public class GetSinglePostHandler extends AbstractRequestHandler<EmptyPayload> {
 

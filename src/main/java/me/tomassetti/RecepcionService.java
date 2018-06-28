@@ -4,6 +4,7 @@ import com.beust.jcommander.JCommander;
 import freemarker.cache.ClassTemplateLoader;
 import freemarker.template.Configuration;
 import me.tomassetti.handlers.*;
+import me.tomassetti.model.Area;
 import me.tomassetti.model.Model;
 import me.tomassetti.sql2omodel.Sql2oModel;
 import org.sql2o.Sql2o;
@@ -16,6 +17,7 @@ import spark.Response;
 import spark.Route;
 import spark.template.freemarker.FreeMarkerEngine;
 
+import java.util.Map;
 import java.util.UUID;
 import java.util.logging.Logger;
 
@@ -25,10 +27,10 @@ import static spark.Spark.put;
 import static spark.Spark.delete;
 import static spark.Spark.port;
 
-public class BlogService 
+public class RecepcionService 
 {
 
-    private static final Logger logger = Logger.getLogger(BlogService.class.getCanonicalName());
+    private static final Logger logger = Logger.getLogger(RecepcionService.class.getCanonicalName());
 
     public static void main( String[] args) {
         CommandLineOptions options = new CommandLineOptions();
@@ -51,10 +53,10 @@ public class BlogService
             }
         });
 
-        Model model = new Sql2oModel(sql2o);
+        Model sql2o_model = new Sql2oModel(sql2o);
         FreeMarkerEngine freeMarkerEngine = new FreeMarkerEngine();
         Configuration freeMarkerConfiguration = new Configuration();
-        freeMarkerConfiguration.setTemplateLoader(new ClassTemplateLoader(BlogService.class, "/"));
+        freeMarkerConfiguration.setTemplateLoader(new ClassTemplateLoader(RecepcionService.class, "/"));
         freeMarkerEngine.setConfiguration(freeMarkerConfiguration);
         
         get("/alive", new Route() {
@@ -68,11 +70,22 @@ public class BlogService
 
         //AREAS
         //listado
-        get("/areas", new AreasSearchHandler(model, freeMarkerEngine));
-        /*
+        get("/areas", new AreasSearchHandler(sql2o_model, freeMarkerEngine));
         //crear
-        get("/areas/create_form", null);
-        post("/areas", null); //AreaCreatePayload
+        get("/areas/create_form", new AbstractRequestHandler<EmptyPayload>(EmptyPayload.class, null, freeMarkerEngine) {
+			@Override
+			protected Answer processImpl(EmptyPayload value, Map<String, String> urlParams, boolean shouldReturnHtml) {
+				return view("areas_create.ftl", new Area());
+			}
+		});
+        post("/areas", new AbstractRequestHandler<NewAreaPayload>(NewAreaPayload.class, null, freeMarkerEngine) {
+			@Override
+			protected Answer processImpl(NewAreaPayload value, Map<String, String> urlParams, boolean shouldReturnHtml) {
+				sql2o_model.areasCreate(value);
+				return redirect("/areas");
+			}
+		}); //AreaCreatePayload
+        /*
         //editar
         get("/areas/:uuid/edit_form", null);
         put("/areas/:uuid", null); //AreaUpdatePayload

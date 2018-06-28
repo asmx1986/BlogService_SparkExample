@@ -18,5 +18,5 @@ public interface Model {
     void deletePost(UUID uuid);
     */
 	List<Area> areasList();
-	
+	void areasCreate(Area area);
 }

@@ -1,27 +1,25 @@
 package me.tomassetti.model;
 
 import lombok.Data;
-
-import java.util.Date;
 import java.util.UUID;
 
 @Data
 public class TipoDocumento {
+    private UUID uuid;
+    private String nombre;
     
-   
-    public String id;
-    public String nombre;
-
-    
-	public String getid() {
-		return id;
+	public UUID getUuid() {
+		return uuid;
 	}
-	public void setid(String id) {
-		this.id = id;
+	
+	public void setUuid(UUID uuid) {
+		this.uuid = uuid;
 	}
+	
 	public String getnombre() {
 		return nombre;
 	}
+	
 	public void setnombre(String nombre) {
 		this.nombre = nombre;
 	}

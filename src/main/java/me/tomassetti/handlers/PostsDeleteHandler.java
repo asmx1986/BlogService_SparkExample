@@ -3,7 +3,6 @@ package me.tomassetti.handlers;
 import me.tomassetti.AbstractRequestHandler;
 import me.tomassetti.Answer;
 import me.tomassetti.model.Model;
-import me.tomassetti.model.Post;
 
 import java.util.Map;
 import java.util.Optional;

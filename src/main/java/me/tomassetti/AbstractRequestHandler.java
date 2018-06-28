@@ -1,8 +1,13 @@
 package me.tomassetti;
 
 import java.io.IOException;
+import java.nio.charset.Charset;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+
+import org.apache.http.NameValuePair;
+import org.apache.http.client.utils.URLEncodedUtils;
 
 import me.tomassetti.handlers.EmptyPayload;
 import me.tomassetti.model.Model;
@@ -45,6 +50,10 @@ public abstract class AbstractRequestHandler<V extends Validable> implements Req
     	viewModel.put("bodyTemplate", view);
         return new Answer(200, this.freeMarkerEngine.render(new ModelAndView(viewModel, "layout.ftl")));
     }
+    
+    protected Answer redirect(String location) {
+        return new Answer(303, location);    	
+    }
 
     public static String dataToJson(Object data) {
         try {
@@ -73,18 +82,32 @@ public abstract class AbstractRequestHandler<V extends Validable> implements Req
             ObjectMapper objectMapper = new ObjectMapper();
             V value = null;
             if (valueClass != EmptyPayload.class) {
-                value = objectMapper.readValue(request.body(), valueClass);
+            	String auxBody = request.body();
+        		if (!request.contentType().contains("json")) {
+        			List<NameValuePair> pairs = URLEncodedUtils.parse(auxBody, Charset.defaultCharset());
+        			Map<String, String> map = new HashMap<>();
+    		        for(int i=0; i<pairs.size(); i++){
+    		            NameValuePair pair = pairs.get(i);
+    		            map.put(pair.getName(), pair.getValue());
+    		        }
+    		        auxBody = objectMapper.writeValueAsString(map);
+        		}
+    			value = objectMapper.readValue(auxBody, valueClass);
             }
             Map<String, String> urlParams = request.params();
             Answer answer = process(value, urlParams, shouldReturnHtml(request));
             response.status(answer.getCode());
-            String bodyResult = answer.getBody();
-            if (shouldReturnHtml(request)) {
-                response.type("text/html");
+            if (answer.getCode() == 303) {
+            	response.redirect(answer.getBody(), answer.getCode());
             } else {
-                response.type("application/json");
+	            String bodyResult = answer.getBody();
+	            if (shouldReturnHtml(request)) {
+	                response.type("text/html");
+	            } else {
+	                response.type("application/json");
+	            }
+	            response.body(bodyResult);
             }
-            response.body(bodyResult);
             return answer.getBody();
         } catch (JsonMappingException e) {
             response.status(400);

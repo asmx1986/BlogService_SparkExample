@@ -9,7 +9,6 @@ import java.util.Collections;
 
 import me.tomassetti.Answer;
 import me.tomassetti.model.Model;
-import me.tomassetti.model.Post;
 import spark.template.freemarker.FreeMarkerEngine;
 
 import org.easymock.EasyMock;

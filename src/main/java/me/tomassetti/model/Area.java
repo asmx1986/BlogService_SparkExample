@@ -1,37 +1,36 @@
 package me.tomassetti.model;
 
 import lombok.Data;
-
-import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
 @Data
 public class Area {
+    private UUID uuid;
+    private String nombre;
+    private List<Motivo> motivos; 
     
-   
-    public String Id;
-    public String Nombre;
-    public List <Motivo> Motivos; 
-    
-	public String getId() {
-		return Id;
+	public UUID getUuid() {
+		return uuid;
 	}
-	public void setid(String Id) {
-		this.Id = Id;
+	
+	public void setUuid(UUID uuid) {
+		this.uuid = uuid;
 	}
+	
 	public String getNombre() {
-		return Nombre;
+		return nombre;
 	}
+	
 	public void setNombre(String nombre) {
-		this.Nombre = nombre;
+		this.nombre = nombre;
 	}
 	
 	public List<Motivo> getMotivos() {
-		return Motivos;
-	}
-	public void setMotivo(List<Motivo> Motivos) {
-		this.Motivos = Motivos;
+		return motivos;
 	}
 	
+	public void setMotivos(List<Motivo> motivos) {
+		this.motivos = motivos;
+	}
 }
